@@ -28,10 +28,11 @@ public class TicTacToe {
         int cpupos =0;
         String results;
         boolean checkusedFlag=false;
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
        while(playerpos != 99) {
-           playerpos = scan.nextInt();
-           while (playerPositions.contains(playerpos) || cpuPositions.contains(cpupos)) {
+           Scanner scan = new Scanner(System.in);
+           //playerpos = scan.nextInt();
+           while (playerPositions.contains(playerpos) || cpuPositions.contains(playerPositions)) {
                System.out.println("Position taken! Enter a correct position");
                playerpos = scan.nextInt();
            }
@@ -46,7 +47,10 @@ public class TicTacToe {
                Random random=new Random();
                cpupos=random.nextInt(9)+1;
            //System.out.println("Position taken! Enter a correct position");
-           while(playerPositions.contains(cpupos)|| cpuPositions.contains(cpupos)) cpupos = random.nextInt() + 1;
+           while(playerPositions.contains(cpupos)|| cpuPositions.contains(playerPositions)){
+               cpupos = random.nextInt(9) + 1;
+           }
+
                placePiece(gameBoard,cpupos,"CPU");
                printGameBoard(gameBoard);
                results= checkWinner();

@@ -29,34 +29,32 @@ public class TicTacToe {
         String results;
         boolean checkusedFlag=false;
         //Scanner scan = new Scanner(System.in);
-       while(playerpos != 99) {
+       while(playerpos != 9 ) {
            Scanner scan = new Scanner(System.in);
-           //playerpos = scan.nextInt();
+           playerpos = scan.nextInt();
            while (playerPositions.contains(playerpos) || cpuPositions.contains(playerPositions)) {
                System.out.println("Position taken! Enter a correct position");
                playerpos = scan.nextInt();
            }
            placePiece(gameBoard, playerpos, "Player");
-           printGameBoard(gameBoard);
-           results = checkWinner();
+           //printGameBoard(gameBoard);
 
-           if(results.length()>0) {
-               System.out.println(results);
-               break;
-           }
                Random random=new Random();
-               cpupos=random.nextInt(9)+1;
+               cpupos=random.nextInt(9);
+               if (cpupos==0) cpupos=1;
            //System.out.println("Position taken! Enter a correct position");
            while(playerPositions.contains(cpupos)|| cpuPositions.contains(playerPositions)){
-               cpupos = random.nextInt(9) + 1;
+               cpupos = random.nextInt(9);
+               if (cpupos==0) cpupos=1;
            }
 
                placePiece(gameBoard,cpupos,"CPU");
-               printGameBoard(gameBoard);
+               //printGameBoard(gameBoard);
                results= checkWinner();
                if(results.length()>0) {
                    System.out.println(results);
-                   break;
+
+                   //break;
                }
            }
          }
@@ -81,12 +79,15 @@ public class TicTacToe {
         }
         switch(pos){
             case 0:
+                 clearGame(gameBoard,playerPositions,cpuPositions);
                  printGameBoard(gameBoard);
-                break;
+                 System.out.println(" Welcome to new game");
+                 break;
 
             case 1:
                 gameBoard[0][0]=symbol;
                 printGameBoard(gameBoard);
+
                 break;
             case 2:
                 gameBoard[0][2]=symbol;
@@ -126,6 +127,19 @@ public class TicTacToe {
            //     throw new IllegalStateException("Please enter value (1-9)" + pos);
             //    break;
         }
+      }
+      public static void clearGame(char [][] gameBoard, ArrayList<Integer> playerlist,ArrayList<Integer> machinelist){
+          gameBoard[0][0]=' ';
+          gameBoard[0][2]=' ';
+          gameBoard[0][4]=' ';
+          gameBoard[2][0]=' ';
+          gameBoard[2][2]=' ';
+          gameBoard[2][4]=' ';
+          gameBoard[4][0]=' ';
+          gameBoard[4][2]=' ';
+          gameBoard[4][4]=' ';
+          playerlist.clear();
+          machinelist.clear();
       }
 
       public static String checkWinner(){

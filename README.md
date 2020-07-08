@@ -1,5 +1,5 @@
 # BoardGames
 Command line Board game  
-Check winner of player or machine  
-Test  
+Check *winner* player or machine*  
+
 
